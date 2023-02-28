@@ -1,0 +1,441 @@
+﻿<Window x:Class="DPOService.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:DPOService"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1440" WindowStartupLocation ="CenterScreen"
+        WindowStyle="None" AllowsTransparency="True" Background="Transparent" Loaded="Window_Loaded" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="ButtonVisibilityCheck1" />
+        <BooleanToVisibilityConverter x:Key="ButtonVisibilityCheck2" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition x:Name="MainWindowResize" Width="1190"/>
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="10 0 0 10">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#f2f2f2" Offset="0"/>
+                    <GradientStop Color="#e5e5e5" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 35 0 0">
+                    <Border CornerRadius="10" Width="150" Height="150">
+                        <Image x:Name="Logo" Source="/DPOLogo.png" MouseLeftButtonDown="Logo_MouseLeftButtonDown"/>
+                    </Border>
+                </StackPanel>
+                <Separator Height="0.8" Margin="20 30" Background="#999999"/>
+                <RadioButton x:Name="MainPageButton" Style="{StaticResource menuButton}" IsChecked="True">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Главная" Style="{StaticResource menuButtonText}"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton Visibility="Visible" x:Name="StatisticPageButton" Style="{StaticResource menuButton}" IsChecked="False" Checked="StatisticPageButton_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="ChartSimple" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Статистика" Style="{StaticResource menuButtonText}"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="ExitButton" Style="{StaticResource menuButton}" Checked="ExitButton_Checked">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Icon="RightFromBracket" Style="{StaticResource menuButtonIcon}"/>
+                        <TextBlock Text="Выход" Style="{StaticResource menuButtonText}"/>
+                    </StackPanel>
+                </RadioButton>
+                
+                
+                
+
+            </StackPanel>
+        </Border>
+        <Border x:Name="MainPage" Visibility="Visible" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#f2f2f2" Offset="0"/>
+                    <GradientStop Color="#e5e5e5" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="75"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 20">
+
+                </StackPanel>
+                <!--//
+                <Grid Grid.Row="1" Margin="50 20 15 40"> {Binding IsChecked,ElementName=MainPageButton,Converter={StaticResource ButtonVisibilityCheck1}}
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <uc:Cards x:Name="CountUsers" Grid.Column="0" Title="Число клиентов" Number="0" Icon="User" BackGround1="#5b0f20" BackGround2 ="#cda1ab" EllipseBackGround1="#c08a97" EllipseBackGround2="#27060e"/>
+                    <uc:Cards Grid.Column="1" Title="" Number=""  BackGround1="#5b0f20" BackGround2 ="#cda1ab" EllipseBackGround1="#c08a97" EllipseBackGround2="#27060e"/>
+
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                    </Grid.Effect>
+                </Grid>
+                //-->
+                    <Grid Grid.Row="0" Margin="0 0 15 0">
+
+                    </Grid>
+                    <Grid Grid.Row="1" Margin="0 0 15 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="175"/>
+                        <ColumnDefinition Width="175"/>
+                        <ColumnDefinition Width="175"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Width="300" HorizontalAlignment="Left" Margin="25 0 0 0">
+                        <TextBlock x:Name="searchText" Margin="20 0 0 60" Foreground="#FF69717D" IsHitTestVisible="False" Panel.ZIndex="1" Text="Поиск" FontSize="13"/>
+                        <TextBox x:Name="search" Style="{StaticResource SearchTextBox}" KeyDown="search_KeyDown"/>
+
+                    </Grid>
+
+                    <Button x:Name="addButton" Visibility="Hidden" Grid.Column="3" HorizontalAlignment="Center" Margin="0 0 0 0" Style="{StaticResource addButton}" Click="addButton_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Добавить"/>
+                            <fa:IconImage Icon="Pen" Style="{StaticResource addButtonIcon}"/>
+                        </StackPanel>
+                    </Button>
+
+
+                </Grid>
+
+                <Grid Grid.Row="2" Margin="15 0 15 15">
+                    <DataGrid IsTabStop="False" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" x:Name="TabelMain" Margin="0 0 0 0" EnableRowVirtualization="False" Grid.Column="2" CanUserReorderColumns="False" CanUserResizeColumns="False"  CanUserResizeRows="False" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" SelectionChanged="TabelMain_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Width="70" Binding="{Binding ID}"/>
+                            <DataGridTextColumn Header="ФИО" Width="*" Binding="{Binding FULLNAME}"/>
+                            <DataGridTextColumn Header="Организация" Width="120" Binding="{Binding NAMEORGANIZATION}"/>
+                            <DataGridTextColumn Header="Телефон" Width="120" Binding="{Binding PHONENUMBER}"/>
+                            <DataGridTextColumn Header="Программа обучения" Width="159" Binding="{Binding EDUPROGRAM}"/>
+                            <DataGridTextColumn Header="Дата начала обучения" Width="163" Binding="{Binding EDUDATE}"/>
+                            <DataGridTextColumn Header="Окончание удостоверения" Width="190" Binding="{Binding EXPCERTIFICATE}"/>
+                            <DataGridTemplateColumn x:Name="actions" Header="Действия" Visibility="Hidden" Width="100" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button x:Name="editButton1" Style="{StaticResource gridEditButton}" Click="editButton1_Click">
+                                                <fa:IconImage Icon="FilePen" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                            <Button x:Name="delButton1" Margin="3 0 2 0" Style="{StaticResource gridDelButton}" Click="delButton1_Click">
+                                                <fa:IconImage Icon="Trash" Style="{StaticResource gridButtonIcon}"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border x:Name="addPage" Visibility="Hidden" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#f2f2f2" Offset="0"/>
+                    <GradientStop Color="#e5e5e5" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 20">
+
+                </StackPanel>
+
+
+                <Grid Grid.Row="1" Margin="0 0 15 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+                <Border Grid.Row="3" Height="600" Width="700" HorizontalAlignment="Center" CornerRadius="25" >
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                            <GradientStop Color="#c1c1c1" Offset="0"/>
+                            <GradientStop Color="#c1c1c1" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="340"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock x:Name="addSurNameTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Фамилия" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addSurNameTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1">
+                                <TextBlock x:Name="addNameTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Имя" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addNameTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2">
+                                <TextBlock x:Name="addMiddleNameTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Отчество" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addMiddleNameTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <TextBlock x:Name="addNameOrganizationTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Название организации" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addOrganizationTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="4">
+                                <TextBlock x:Name="addPhoneNumberTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Номер телефона" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addPhoneNumberTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                <TextBlock x:Name="addEduProgramTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Программа обучения" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addEduProgramTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1">
+                                <TextBlock x:Name="addEduDateTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Дата начала обучения" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addEduDateTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1">
+                                <TextBlock x:Name="addExpDateTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Окончание удостоверения" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="addExpDateTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5" Grid.Column="0">
+                                <Button x:Name="addButtonBack" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 25 0 0" Style="{StaticResource addButton}" Click="addButtonBack_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Назад"/>
+                                        <fa:IconImage Icon="RotateBack" Style="{StaticResource addButtonIcon}"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5" Grid.Column="1">
+                                <Button x:Name="addButtonConf" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 25 0 0" Style="{StaticResource addButton}" Click="addButtonConf_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Добавить"/>
+                                        <fa:IconImage Icon="Pen" Style="{StaticResource addButtonIcon}"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <Border x:Name="editPage" Visibility="Hidden" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#f2f2f2" Offset="0"/>
+                    <GradientStop Color="#e5e5e5" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 20">
+
+                </StackPanel>
+
+
+                <Grid Grid.Row="1" Margin="0 0 15 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                </Grid>
+                <Border Grid.Row="3" Height="600" Width="700" HorizontalAlignment="Center" CornerRadius="25" >
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                            <GradientStop Color="#c1c1c1" Offset="0"/>
+                            <GradientStop Color="#c1c1c1" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="100"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="340"/>
+                                <ColumnDefinition Width="340"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <TextBlock x:Name="editSurNameTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Фамилия" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editSurNameTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1">
+                                <TextBlock x:Name="editNameTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Имя" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editNameTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2">
+                                <TextBlock x:Name="editMiddleNameTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Отчество" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editMiddleNameTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="3">
+                                <TextBlock x:Name="editNameOrganizationTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Название организации" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editOrganizationTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="4">
+                                <TextBlock x:Name="editPhoneNumberTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Номер телефона" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editPhoneNumberTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                <TextBlock x:Name="editEduProgramTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Программа обучения" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editEduProgramTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1">
+                                <TextBlock x:Name="editEduDateTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Дата начала обучения" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editEduDateTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1">
+                                <TextBlock x:Name="editExpDateTextBlock" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Окончание удостоверения" FontSize="13"/>
+                                <TextBox Margin="10 0 0 0" x:Name="editExpDateTextBox" Style="{StaticResource SearchTextBox}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="3" Grid.Column="1">
+                                <TextBlock x:Name="logsadd" Margin="20 10 0 4" Foreground="#000000" IsHitTestVisible="False" Panel.ZIndex="1" Text="Запись добавили: " FontSize="13"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5" Grid.Column="0">
+                                <Button x:Name="editButtonBack" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 25 0 0" Style="{StaticResource addButton}" Click="editButtonBack_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Назад"/>
+                                        <fa:IconImage Icon="RotateBack" Style="{StaticResource addButtonIcon}"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Row="5" Grid.Column="1">
+                                <Button x:Name="editButtonConf" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20 25 0 0" Style="{StaticResource addButton}" Click="editButtonConf_Click">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Изменить"/>
+                                        <fa:IconImage Icon="FilePen" Style="{StaticResource addButtonIcon}"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+       <!-- Visibility="{Binding IsChecked,ElementName=StatisticPageButton,Converter={StaticResource ButtonVisibilityCheck2}}"-->
+        <Border x:Name="StatisticPage" Visibility="{Binding IsChecked,ElementName=StatisticPageButton,Converter={StaticResource ButtonVisibilityCheck2}}" Grid.Column="1" CornerRadius="0 10 10 0" MouseDown="Border_MouseDown" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
+                    <GradientStop Color="#f2f2f2" Offset="0"/>
+                    <GradientStop Color="#e5e5e5" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="350"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Margin="10">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <!-- <ColumnDefinition Width="*"/> -->
+                    </Grid.ColumnDefinitions>
+
+                    <uc:Cards x:Name="CountUsers" Grid.Column="0" Title="Число клиентов" Number="0" Icon="User" BackGround1="#5b0f20" BackGround2 ="#cda1ab" EllipseBackGround1="#c08a97" EllipseBackGround2="#27060e"/>
+                    <!-- <uc:Cards x:Name="Stas1" Grid.Column="1" Title="Число клиентов" Number="0" Icon="ArrowAltCircleDown" BackGround1="#5b0f20" BackGround2 ="#cda1ab" EllipseBackGround1="#c08a97" EllipseBackGround2="#27060e" Visibility="Hidden"/> -->
+
+                    <Grid.Effect>
+                        <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"/>
+                    </Grid.Effect>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <!-- <ColumnDefinition Width="*"/> -->
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" CornerRadius="30" Margin="10" Padding="35 15" Background="#c1c1c1" HorizontalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="72"/>
+                                <ColumnDefinition Width="72"/>
+                                <ColumnDefinition Width="72"/>
+                                <ColumnDefinition Width="72"/>
+                                <ColumnDefinition Width="72"/>
+                                <ColumnDefinition Width="72"/>
+                                <ColumnDefinition Width="72"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+
+                            <Border x:Name="MondayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+                            <Border x:Name="TuesdayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+                            <Border x:Name="WednesdayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+                            <Border x:Name="ThursdayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+                            <Border x:Name="FridayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+                            <Border x:Name="SaturdayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+                            <Border x:Name="SundayGraph" Width="50" Height="0" Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Bottom" CornerRadius="10 10 0 0" Background="#FF7F2B3E"/>
+
+                            <TextBlock x:Name="MondayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="TuesdayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="WednesdayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="ThursdayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="FridayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="SaturdayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="5" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="SundayNum" Text="0" FontSize="16" Grid.Row="1" Grid.Column="6" HorizontalAlignment="Center"/>
+                            
+                            <TextBlock Text="ПН" FontSize="16" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"/>
+                            <TextBlock Text="ВТ" FontSize="16" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center"/>
+                            <TextBlock Text="СР" FontSize="16" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center"/>
+                            <TextBlock Text="ЧТ" FontSize="16" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Center"/>
+                            <TextBlock Text="ПТ" FontSize="16" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"/>
+                            <TextBlock Text="СБ" FontSize="16" Grid.Row="2" Grid.Column="5" HorizontalAlignment="Center"/>
+                            <TextBlock Text="ВС" FontSize="16" Grid.Row="2" Grid.Column="6" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
