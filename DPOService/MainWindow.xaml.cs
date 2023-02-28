@@ -54,6 +54,7 @@ namespace DPOService
         public MainWindow()
         {
             InitializeComponent();
+			//Пример для коммита!
         }
 
         private bool IsMaximize = false;

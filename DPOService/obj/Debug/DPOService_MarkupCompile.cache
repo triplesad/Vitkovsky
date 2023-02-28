@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\DPOService\obj\Debug\
+C:\Users\triplesad\Vitkovsky\DPOService\obj\Debug\
 DPOService
 none
 false
 DEBUG;TRACE
-F:\DPOService\App.xaml
-6-610167809
+C:\Users\triplesad\Vitkovsky\DPOService\App.xaml
+6-1729714306
 
-81717806315
-171886975476
+955375065
+17-458827738
 loginPage.xaml;SearchTextBox.xaml;ButtonStyles2.xaml;ButtonStyles.xaml;Cards.xaml;MainWindow.xaml;
 
-False
+True
 
