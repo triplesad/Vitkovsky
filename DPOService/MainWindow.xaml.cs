@@ -55,6 +55,7 @@ namespace DPOService
         {
             InitializeComponent();
 			//Пример для коммита!
+			//Пример для второго коммита!
         }
 
         private bool IsMaximize = false;
